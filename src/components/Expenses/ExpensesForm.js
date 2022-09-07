@@ -60,8 +60,23 @@ const ExpensesForm = (props) => {
     reset: resetPayee,
   } = useInput(isNotEmpty);
 
+  const {
+    value: selectedOption,
+    isValid: selectedOptionIsValid,
+    hasError: selectedOptionHasError,
+    changeSelectedValueHandler: addUserOnChangeHandler,
+    inputBlurHandler: selectedOptionBlurHandler,
+    reset: resetSelectedOption,
+  } = useInput((value) => value.length !== 0);
+
   let formIsValid = false;
-  if (titleIsValid && amountIsValid && dateIsValid && payeeIsValid) {
+  if (
+    titleIsValid &&
+    amountIsValid &&
+    dateIsValid &&
+    payeeIsValid &&
+    selectedOptionIsValid
+  ) {
     formIsValid = true;
   }
 
@@ -83,6 +98,7 @@ const ExpensesForm = (props) => {
     resetAmount();
     resetDate();
     resetPayee();
+    resetSelectedOption();
   };
 
   const titleControlClasses = titleHasError
@@ -101,18 +117,16 @@ const ExpensesForm = (props) => {
     ? `${classes.control} ${classes.invalid}`
     : `${classes.control}`;
 
+  const selectedOptionClasses = selectedOptionHasError
+    ? `${classes.control} ${classes.invalid}`
+    : `${classes.control}`;
+
   //Hardcoded users option
   const options = [
     { value: "Patrick", label: "Patrick" },
     { value: "Fayola", label: "Fayola" },
     { value: "Raymond", label: "Raymond" },
   ];
-
-  const [selectedOption, setSelectedOption] = useState([]);
-
-  const addUserOnChangeHandler = (selected) => {
-    setSelectedOption(selected);
-  };
 
   return (
     <Card className={classes.form}>
@@ -173,7 +187,7 @@ const ExpensesForm = (props) => {
           )}
         </div>
 
-        <div>
+        <div className={selectedOptionClasses}>
           <MySelect
             options={options}
             isMulti
@@ -181,10 +195,14 @@ const ExpensesForm = (props) => {
             hideSelectedOptions={false}
             components={{ Option }}
             onChange={addUserOnChangeHandler}
+            onBlur={selectedOptionBlurHandler}
             allowSelectAll={true}
             value={selectedOption}
             placeholder="Shared with..."
           />
+          {selectedOptionHasError && (
+            <p className={classes["error-text"]}>Please select users name!</p>
+          )}
         </div>
 
         <div className={classes.actions}>
