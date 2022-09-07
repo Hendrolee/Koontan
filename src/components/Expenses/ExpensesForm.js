@@ -1,10 +1,27 @@
-// import { useState } from "react";
+import { useState } from "react";
+import { components } from "react-select";
+import MySelect from "./MySelect";
 
 import classes from "./ExpensesForm.module.css";
 import Card from "../UI/Card";
 import useInput from "../hooks/use-input";
 
 const isNotEmpty = (value) => value.trim() !== "";
+
+const Option = (props) => {
+  return (
+    <div>
+      <components.Option {...props}>
+        <input
+          type="checkbox"
+          checked={props.isSelected}
+          onChange={() => null}
+        />{" "}
+        <label>{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
 
 const ExpensesForm = (props) => {
   const {
@@ -84,6 +101,19 @@ const ExpensesForm = (props) => {
     ? `${classes.control} ${classes.invalid}`
     : `${classes.control}`;
 
+  //Hardcoded users option
+  const options = [
+    { value: "Patrick", label: "Patrick" },
+    { value: "Fayola", label: "Fayola" },
+    { value: "Raymond", label: "Raymond" },
+  ];
+
+  const [selectedOption, setSelectedOption] = useState([]);
+
+  const addUserOnChangeHandler = (selected) => {
+    setSelectedOption(selected);
+  };
+
   return (
     <Card className={classes.form}>
       <form onSubmit={submitHandler}>
@@ -144,17 +174,17 @@ const ExpensesForm = (props) => {
         </div>
 
         <div>
-          <label htmlFor="sharedWith">Shared With</label>
-          <input
-            type="checkbox"
-            id="sharedWith"
-            value={enteredPayee}
-            onChange={changePayeeHandler}
-            onBlur={payeeBlurHandler}
+          <MySelect
+            options={options}
+            isMulti
+            closeMenuOnSelect={false}
+            hideSelectedOptions={false}
+            components={{ Option }}
+            onChange={addUserOnChangeHandler}
+            allowSelectAll={true}
+            value={selectedOption}
+            placeholder="Shared with..."
           />
-          {payeeHasError && (
-            <p className={classes["error-text"]}>Please enter payee's name!</p>
-          )}
         </div>
 
         <div className={classes.actions}>
