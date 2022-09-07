@@ -1,0 +1,21 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: rgb(126, 58, 203);
+  max-width: 100%;
+  padding: 5px;
+}
+
+.title {
+  text-align: center;
+  color: rgb(240, 228, 228);
+}
+
+.header-content {
+  margin: 0 auto;
+  width: 960px;
+}
