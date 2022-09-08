@@ -92,7 +92,9 @@ const ExpensesForm = (props) => {
       amount: `$${+enteredAmount}`,
       date: new Date(enteredDate),
       payee: enteredPayee,
+      sharedWith: selectedOption,
     };
+
     props.onSaveExpenseData(recordDetails);
     resetTitle();
     resetAmount();

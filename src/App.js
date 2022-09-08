@@ -6,7 +6,7 @@ import Navigation from "./components/UI/Navigation";
 function App() {
   const [expensesArray, setExpensesArray] = useState([
     {
-      key: Math.random().toString(),
+      id: Math.random().toString(),
       title: "Groceries",
       amount: `$${22}`,
       date: new Date(),
@@ -22,6 +22,7 @@ function App() {
         amount: data.amount,
         date: data.date,
         payee: data.payee,
+        sharedWith: data.sharedWith,
         id: Math.random().toString(),
       });
       return updatedExpenses;
@@ -32,7 +33,7 @@ function App() {
     <Fragment>
       <Navigation />
       <Options onAddExpenses={addExpensesHandler} />
-      <ExpensesList expenses={expensesArray} />
+      <ExpensesList expenses={expensesArray} />;
     </Fragment>
   );
 }
