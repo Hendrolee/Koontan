@@ -33,10 +33,7 @@ const Options = (props) => {
         </div>
       )}
       {isEditingExpense && !isEditingDebts && (
-        <NewExpense
-          onAddExpense={props.onAddExpenses}
-          onCancel={stopEditingExpenseHandler}
-        />
+        <NewExpense onCancel={stopEditingExpenseHandler} />
       )}
       {isEditingDebts && !isEditingExpense && (
         <Debts onCancel={stopEditingDebtsHandler} />

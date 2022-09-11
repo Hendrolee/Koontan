@@ -1,7 +1,8 @@
-import { useState } from "react";
 import { components } from "react-select";
 import MySelect from "./MySelect";
+import { useContext } from "react";
 
+import ExpenseContext from "../store/expense-context";
 import classes from "./ExpensesForm.module.css";
 import Card from "../UI/Card";
 import useInput from "../hooks/use-input";
@@ -24,6 +25,8 @@ const Option = (props) => {
 };
 
 const ExpensesForm = (props) => {
+  const expenseCtx = useContext(ExpenseContext);
+
   const {
     value: enteredTitle,
     isValid: titleIsValid,
@@ -95,7 +98,8 @@ const ExpensesForm = (props) => {
       sharedWith: selectedOption,
     };
 
-    props.onSaveExpenseData(recordDetails);
+    expenseCtx.onSaveExpense(recordDetails);
+
     resetTitle();
     resetAmount();
     resetDate();

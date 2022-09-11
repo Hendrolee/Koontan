@@ -1,9 +1,8 @@
+import React from "react";
+
 const ExpenseContext = React.createContext({
-  title: "",
-  amount: 0,
-  date: null,
-  payee: "",
-  sharedWith: "",
+  expenseDetails: [],
+  onSaveExpense: (data) => {},
 });
 
 export default ExpenseContext;
