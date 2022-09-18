@@ -1,13 +1,13 @@
 # Introduction
 
-This project aims to decentralize expense's management system.
-Removing the need of a single person to record expenses of each group members.
-This service is best suited for group travelling, roadtrips and activities.
+This project aims to decentralize expense's management system.\
+Removing the need of a single person to record expenses of each group members.\
+This service is best suited for group travelling, roadtrips and activities.\
 
 ## Third-party library
 
-'@redux/toolkit'
-'react-redux'
+'@redux/toolkit'\
+'react-redux'\
 
 ### `npm start`
 
