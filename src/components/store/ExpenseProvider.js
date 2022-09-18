@@ -19,8 +19,6 @@ const ExpenseProvider = (props) => {
     });
   };
 
-  console.log(expenseState);
-
   return (
     <ExpenseContext.Provider
       value={{
