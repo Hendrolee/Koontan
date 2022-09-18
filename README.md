@@ -4,9 +4,10 @@ This project aims to decentralize expense's management system.
 Removing the need of a single person to record expenses of each group members.
 This service is best suited for group travelling, roadtrips and activities.
 
-## Available Scripts
+## Third-party library
 
-In the project directory, you can run:
+'@redux/toolkit'
+'react-redux'
 
 ### `npm start`
 
