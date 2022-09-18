@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { components } from "react-select";
+import { useDispatch } from "react-redux";
 import MySelect from "./MySelect";
-
 import classes from "./ExpensesForm.module.css";
 import Card from "../UI/Card";
 import useInput from "../hooks/use-input";
+import { expenseActions } from "../store/expense";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
@@ -80,6 +80,8 @@ const ExpensesForm = (props) => {
     formIsValid = true;
   }
 
+  const dispatch = useDispatch();
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -95,7 +97,9 @@ const ExpensesForm = (props) => {
       sharedWith: selectedOption,
     };
 
-    props.onSaveExpenseData(recordDetails);
+    dispatch(expenseActions.addExpense(recordDetails));
+
+    // props.onSaveExpenseData(recordDetails);
     resetTitle();
     resetAmount();
     resetDate();

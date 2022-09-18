@@ -1,8 +1,11 @@
 import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import classes from "./ExpensesList.module.css";
+import { useSelector } from "react-redux";
 
 const ExpensesList = (props) => {
+  const expenses = useSelector((state) => state.expenses.expense);
+  console.log(expenses);
   return (
     <Card className={classes.expenses}>
       <ul className={classes["expenses-list"]}>
