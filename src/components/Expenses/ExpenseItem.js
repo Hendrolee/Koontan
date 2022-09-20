@@ -1,6 +1,5 @@
 import Card from "../UI/Card";
 import classes from "./ExpenseItem.module.css";
-import { useSelector } from "react-redux";
 
 const ExpenseItem = (props) => {
   return (
@@ -24,4 +23,3 @@ const ExpenseItem = (props) => {
 };
 
 export default ExpenseItem;
-<div className="expense-date"></div>;
