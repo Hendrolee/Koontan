@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 
 const ExpensesList = (props) => {
   const expenses = useSelector((state) => state.expenses.expense);
-  console.log(expenses);
+
   return (
     <Card className={classes.expenses}>
       <ul className={classes["expenses-list"]}>
-        {props.expenses.map((expense) => (
+        {expenses.map((expense) => (
           <ExpenseItem
             key={expense.id}
             title={expense.title}

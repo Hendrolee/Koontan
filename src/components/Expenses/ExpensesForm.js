@@ -88,18 +88,23 @@ const ExpensesForm = (props) => {
     if (!formIsValid) {
       return;
     }
+    const date = new Date(enteredDate);
+    const day = date.toLocaleString("en-US", { day: "2-digit" });
+    const month = date.toLocaleString("en-US", { month: "long" });
+    const year = date.getFullYear();
+    const transformedDate = { day, month, year };
 
     const recordDetails = {
       title: enteredTitle,
       amount: `$${+enteredAmount}`,
-      date: new Date(enteredDate),
+      date: transformedDate,
       payee: enteredPayee,
       sharedWith: selectedOption,
+      id: Math.random().toString(),
     };
 
     dispatch(expenseActions.addExpense(recordDetails));
 
-    // props.onSaveExpenseData(recordDetails);
     resetTitle();
     resetAmount();
     resetDate();
