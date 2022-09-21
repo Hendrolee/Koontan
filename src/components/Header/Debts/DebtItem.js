@@ -8,7 +8,7 @@ const DebtItem = (props) => {
         <div className={classes["expense-item__description"]}>
           <h2>{props.title}</h2>
           <div className={classes["expense-payee"]}>{props.payee}</div>
-          <div className={classes["expense-item__price"]}>{props.amount}</div>
+          <div className={classes["expense-item__price"]}>${props.payable}</div>
         </div>
       </Card>
     </li>

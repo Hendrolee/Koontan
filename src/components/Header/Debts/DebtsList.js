@@ -14,6 +14,7 @@ const DebtsList = (props) => {
             date={details.date}
             payee={details.payee}
             sharedWith={details.sharedWith}
+            payable={details.payable}
           />
         ))}
       </ul>

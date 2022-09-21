@@ -96,7 +96,7 @@ const ExpensesForm = (props) => {
 
     const recordDetails = {
       title: enteredTitle,
-      amount: `$${+enteredAmount}`,
+      amount: +enteredAmount,
       date: transformedDate,
       payee: enteredPayee,
       sharedWith: selectedOption,

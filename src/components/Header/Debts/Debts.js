@@ -11,13 +11,21 @@ const Debts = (props) => {
   let filteredValue = [];
 
   // filter the sharedWith user (Hardcoded)
-  const filteredValueTest = expenses.filter((user) =>
-    user.sharedWith.find((individual) => individual.value === "Patrick")
-  );
+  const filteredValueTest = expenses
+    .filter((user) =>
+      user.sharedWith.find((individual) => individual.value === "Patrick")
+    )
+    .map((newValue) => {
+      let amount = newValue.amount;
+      let numberOfUsers = newValue.sharedWith.length;
+      let newObject = {
+        ...newValue,
+        payable: amount / numberOfUsers,
+      };
+      return newObject;
+    });
 
   console.log(filteredValueTest);
-
-  //Calculate payable
 
   return (
     <div>
