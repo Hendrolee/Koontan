@@ -9,23 +9,20 @@ const Debts = (props) => {
   const arrayIsEmpty = expenses.length === 0;
 
   let filteredValue = [];
-  console.log(expenses);
 
-  // filter the sharedWith user
-  for (let i = 0; i < expenses.length; i++) {
-    let searchUser = expenses.filter(
-      (expense) => expense.sharedWith[i].value === "Patrick"
-    );
+  // filter the sharedWith user (Hardcoded)
+  const filteredValueTest = expenses.filter((user) =>
+    user.sharedWith.find((individual) => individual.value === "Patrick")
+  );
 
-    if (searchUser.length !== 0) {
-      filteredValue.push(searchUser);
-    }
-  }
+  console.log(filteredValueTest);
+
+  //Calculate payable
 
   return (
     <div>
       {arrayIsEmpty && <p>You are clean of debts!</p>}
-      <DebtsList value={filteredValue} />
+      <DebtsList value={filteredValueTest} />
       <button onClick={props.onCancel}>Close</button>
     </div>
   );
