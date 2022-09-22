@@ -8,19 +8,16 @@ const Debts = (props) => {
   const expenses = useSelector((state) => state.expenses.expense);
   const arrayIsEmpty = expenses.length === 0;
 
-  let filteredValue = [];
-
   // filter the sharedWith user (Hardcoded)
   const filteredValueTest = expenses
     .filter((user) =>
       user.sharedWith.find((individual) => individual.value === "Patrick")
     )
     .map((newValue) => {
-      let amount = newValue.amount;
       let numberOfUsers = newValue.sharedWith.length;
       let newObject = {
         ...newValue,
-        payable: amount / numberOfUsers,
+        payable: newValue.amount / numberOfUsers,
       };
       return newObject;
     });
@@ -37,3 +34,9 @@ const Debts = (props) => {
 };
 
 export default Debts;
+
+// Needs cleanup variables name
+
+// Move filteredValue method to the store reducer?
+// Then pass the selected name as a payload from this component to the
+// action reducer?
