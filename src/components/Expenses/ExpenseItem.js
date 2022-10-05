@@ -1,4 +1,4 @@
-import Card from "../UI/Card";
+import Card from "../UI/Card/Card";
 import classes from "./ExpenseItem.module.css";
 
 const ExpenseItem = (props) => {

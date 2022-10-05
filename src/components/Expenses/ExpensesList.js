@@ -1,5 +1,5 @@
 import ExpenseItem from "./ExpenseItem";
-import Card from "../UI/Card";
+import Card from "../UI/Card/Card";
 import classes from "./ExpensesList.module.css";
 import { useSelector } from "react-redux";
 

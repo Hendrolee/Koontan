@@ -1,5 +1,5 @@
 import classes from "./DebtItem.module.css";
-import Card from "../../UI/Card";
+import Card from "../../UI/Card/Card";
 import { useSelector } from "react-redux";
 
 const DebtItem = (props) => {

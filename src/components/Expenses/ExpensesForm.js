@@ -2,7 +2,7 @@ import { components } from "react-select";
 import { useDispatch } from "react-redux";
 import MySelect from "./MySelect";
 import classes from "./ExpensesForm.module.css";
-import Card from "../UI/Card";
+import Card from "../UI/Card/Card";
 import useInput from "../hooks/use-input";
 import { expenseActions } from "../store/expense";
 
