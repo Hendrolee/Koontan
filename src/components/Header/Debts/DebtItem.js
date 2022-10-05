@@ -1,22 +1,56 @@
 import classes from "./DebtItem.module.css";
 import Card from "../../UI/Card/Card";
-import { useSelector } from "react-redux";
+import DebtModal from "../../UI/Modal/DebtModal";
+import { Fragment, useState } from "react";
 
 const DebtItem = (props) => {
-  const expenseData = useSelector((state) => state.expenses.expenseItems);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [userHasPaid, setUserHasPaid] = useState(false);
+
+  const expandDetailsHandler = () => {
+    setDisplayModal(true);
+  };
+
+  const closeDetailsHandler = () => {
+    setDisplayModal(false);
+  };
+
+  const paymentConfirmationHandler = (value) => {
+    setUserHasPaid(value);
+  };
+
+  const paymentControlClasses = userHasPaid
+    ? `${classes["expense-item__details"]} ${classes.paidIndicator}`
+    : `${classes["expense-item__details"]}`;
+
   return (
-    <li>
+    <Fragment>
+      {displayModal && (
+        <DebtModal
+          title={props.title}
+          amount={props.amount}
+          date={props.date}
+          payee={props.payee}
+          sharedWith={props.sharedWith}
+          payable={props.payable}
+          onConfirm={closeDetailsHandler}
+          onPaymentConfirmation={paymentConfirmationHandler}
+        />
+      )}
       <Card className={classes["expense-item"]}>
         <div>
           <h1>Pay</h1>
         </div>
         <div className={classes["expense-item__description"]}>
           <div className={classes["expense-item__price"]}>${props.payable}</div>
-          <span className={classes["expense-item__details"]}></span>
+          <span
+            onClick={expandDetailsHandler}
+            className={paymentControlClasses}
+          ></span>
         </div>
         <div className={classes["expense-payee"]}>{props.payee}</div>
       </Card>
-    </li>
+    </Fragment>
   );
 };
 
