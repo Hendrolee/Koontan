@@ -1,33 +1,30 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import DebtsList from "./DebtsList";
 
 const Debts = (props) => {
-  const [debtsSummary, setDebtsSummary] = useState([]);
-
-  const expenses = useSelector((state) => state.expenses.expense);
+  const expenses = useSelector((state) => state.expenses.expenseItems);
   const arrayIsEmpty = expenses.length === 0;
 
   // filter the sharedWith user (Hardcoded)
-  const filteredValueTest = expenses
-    .filter((user) =>
-      user.sharedWith.find((individual) => individual.value === "Patrick")
+  const filteredValue = expenses
+    .filter((item) =>
+      item.sharedWith.find((member) => member.value === "Patrick")
     )
-    .map((newValue) => {
-      let numberOfUsers = newValue.sharedWith.length;
+    .map((filteredExpense) => {
+      let numberOfUsers = filteredExpense.sharedWith.length;
       let newObject = {
-        ...newValue,
-        payable: newValue.amount / numberOfUsers,
+        ...filteredExpense,
+        payable: filteredExpense.amount / numberOfUsers,
       };
       return newObject;
     });
 
-  console.log(filteredValueTest);
+  console.log(filteredValue);
 
   return (
     <div>
       {arrayIsEmpty && <p>You are clean of debts!</p>}
-      <DebtsList value={filteredValueTest} />
+      <DebtsList value={filteredValue} />
       <button onClick={props.onCancel}>Close</button>
     </div>
   );

@@ -4,7 +4,7 @@ import classes from "./ExpensesList.module.css";
 import { useSelector } from "react-redux";
 
 const ExpensesList = () => {
-  const expenses = useSelector((state) => state.expenses.expense);
+  const expenses = useSelector((state) => state.expenses.expenseItems);
 
   return (
     <Card className={classes.expenses}>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const expenseIntialState = {
-  expense: [],
+  expenseItems: [],
 };
 
 const expenseSlice = createSlice({
@@ -9,7 +9,7 @@ const expenseSlice = createSlice({
   initialState: expenseIntialState,
   reducers: {
     addExpense(state, action) {
-      state.expense.unshift(action.payload);
+      state.expenseItems.unshift(action.payload);
     },
   },
 });
