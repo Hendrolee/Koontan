@@ -5,6 +5,7 @@ import classes from "./ExpensesForm.module.css";
 import Card from "../UI/Card/Card";
 import useInput from "../hooks/use-input";
 import { expenseActions } from "../store/expense";
+import Button from "../UI/Button/Button";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
@@ -217,10 +218,8 @@ const ExpensesForm = (props) => {
         </div>
 
         <div className={classes.actions}>
-          <button className={classes.button}>Add</button>
-          <button className={classes.button} onClick={props.onCancel}>
-            Cancel
-          </button>
+          <Button type="submit">Add</Button>
+          <Button onClick={props.onCancel}>Cancel</Button>
         </div>
       </form>
     </Card>
