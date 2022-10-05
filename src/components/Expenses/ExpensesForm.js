@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { components } from "react-select";
+import { useDispatch } from "react-redux";
 import MySelect from "./MySelect";
-
 import classes from "./ExpensesForm.module.css";
 import Card from "../UI/Card";
 import useInput from "../hooks/use-input";
+import { expenseActions } from "../store/expense";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
@@ -80,22 +80,31 @@ const ExpensesForm = (props) => {
     formIsValid = true;
   }
 
+  const dispatch = useDispatch();
+
   const submitHandler = (event) => {
     event.preventDefault();
 
     if (!formIsValid) {
       return;
     }
+    const date = new Date(enteredDate);
+    const day = date.toLocaleString("en-US", { day: "2-digit" });
+    const month = date.toLocaleString("en-US", { month: "long" });
+    const year = date.getFullYear();
+    const transformedDate = { day, month, year };
 
     const recordDetails = {
       title: enteredTitle,
-      amount: `$${+enteredAmount}`,
-      date: new Date(enteredDate),
+      amount: +enteredAmount,
+      date: transformedDate,
       payee: enteredPayee,
       sharedWith: selectedOption,
+      id: Math.random().toString(),
     };
 
-    props.onSaveExpenseData(recordDetails);
+    dispatch(expenseActions.addExpense(recordDetails));
+
     resetTitle();
     resetAmount();
     resetDate();
