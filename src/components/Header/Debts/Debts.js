@@ -19,8 +19,6 @@ const Debts = (props) => {
       return newObject;
     });
 
-  console.log(filteredValue);
-
   return (
     <div>
       {arrayIsEmpty && <p>You are clean of debts!</p>}
