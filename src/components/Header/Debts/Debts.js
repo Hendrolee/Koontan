@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import DebtsList from "./DebtsList";
+import Button from "../../UI/Button/Button";
 
 const Debts = (props) => {
   const expenses = useSelector((state) => state.expenses.expenseItems);
@@ -23,7 +24,7 @@ const Debts = (props) => {
     <div>
       {arrayIsEmpty && <p>You are clean of debts!</p>}
       <DebtsList value={filteredValue} />
-      <button onClick={props.onCancel}>Close</button>
+      <Button onClick={props.onCancel}>Close</Button>
     </div>
   );
 };
