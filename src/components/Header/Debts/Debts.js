@@ -15,7 +15,7 @@ const Debts = (props) => {
       let numberOfUsers = filteredExpense.sharedWith.length;
       let newObject = {
         ...filteredExpense,
-        payable: filteredExpense.amount / numberOfUsers,
+        payable: (filteredExpense.amount / numberOfUsers).toFixed(2),
       };
       return newObject;
     });
