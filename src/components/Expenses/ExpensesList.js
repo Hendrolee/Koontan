@@ -16,6 +16,7 @@ const ExpensesList = () => {
             amount={expense.amount}
             date={expense.date}
             payee={expense.payee}
+            sharedWith={expense.sharedWith}
           />
         ))}
       </ul>
