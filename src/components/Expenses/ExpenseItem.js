@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import Card from "../UI/Card/Card";
+import EditExpenseModal from "../UI/Modal/EditExpenseModal";
 import classes from "./ExpenseItem.module.css";
-import ExpensesForm from "./ExpensesForm";
 
 const ExpenseItem = (props) => {
   const [isEditingExpense, setIsEditingExpense] = useState(false);
@@ -12,10 +12,11 @@ const ExpenseItem = (props) => {
     setIsEditingExpense(false);
   };
 
+  console.log(props);
   return (
     <Fragment>
       {isEditingExpense && (
-        <ExpensesForm onCancel={stopEditingExpenseHandler} />
+        <EditExpenseModal id={props.id} onConfirm={stopEditingExpenseHandler} />
       )}
       <Card
         onClick={startEditingExpenseHandler}
