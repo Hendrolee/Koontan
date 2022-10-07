@@ -1,10 +1,26 @@
+import { Fragment, useState } from "react";
 import Card from "../UI/Card/Card";
 import classes from "./ExpenseItem.module.css";
+import ExpensesForm from "./ExpensesForm";
 
 const ExpenseItem = (props) => {
+  const [isEditingExpense, setIsEditingExpense] = useState(false);
+  const startEditingExpenseHandler = () => {
+    setIsEditingExpense(true);
+  };
+  const stopEditingExpenseHandler = () => {
+    setIsEditingExpense(false);
+  };
+
   return (
-    <li>
-      <Card className={classes["expense-item"]}>
+    <Fragment>
+      {isEditingExpense && (
+        <ExpensesForm onCancel={stopEditingExpenseHandler} />
+      )}
+      <Card
+        onClick={startEditingExpenseHandler}
+        className={classes["expense-item"]}
+      >
         <div className={classes["expense-date"]}>
           <div className={classes["expense-date__month"]}>
             {props.date.month}
@@ -18,7 +34,7 @@ const ExpenseItem = (props) => {
           <div className={classes["expense-item__price"]}>${props.amount}</div>
         </div>
       </Card>
-    </li>
+    </Fragment>
   );
 };
 
