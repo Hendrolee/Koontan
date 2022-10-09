@@ -26,15 +26,20 @@ const Option = (props) => {
 
 const ExpensesForm = (props) => {
   const onEditItem = { ...props.itemData };
-  const stringToIntDate = new Date(
-    Date.parse(
-      onEditItem.date.month + `${onEditItem.date.day}, ${onEditItem.date.year}`
-    )
-  );
+  let onEditItemDate = "";
 
-  let onEditItemDate = `${stringToIntDate.getFullYear()}-${
-    stringToIntDate.getMonth() + 1
-  }-${stringToIntDate.toLocaleString("en-US", { day: "2-digit" })}`;
+  if (Object.keys(onEditItem).length !== 0) {
+    const stringToIntDate = new Date(
+      Date.parse(
+        onEditItem.date.month +
+          `${onEditItem.date.day}, ${onEditItem.date.year}`
+      )
+    );
+
+    onEditItemDate = `${stringToIntDate.getFullYear()}-${
+      stringToIntDate.getMonth() + 1
+    }-${stringToIntDate.toLocaleString("en-US", { day: "2-digit" })}`;
+  }
 
   const {
     value: enteredTitle,
