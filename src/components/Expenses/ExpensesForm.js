@@ -7,7 +7,7 @@ import useInput from "../hooks/use-input";
 import { expenseActions } from "../store/expense";
 import Button from "../UI/Button/Button";
 
-const isNotEmpty = (value) => value.trim() !== "";
+const isNotEmpty = (value) => value.length !== 0;
 
 const Option = (props) => {
   return (
@@ -25,6 +25,17 @@ const Option = (props) => {
 };
 
 const ExpensesForm = (props) => {
+  const onEditItem = { ...props.itemData };
+  const stringToIntDate = new Date(
+    Date.parse(
+      onEditItem.date.month + `${onEditItem.date.day}, ${onEditItem.date.year}`
+    )
+  );
+
+  let onEditItemDate = `${stringToIntDate.getFullYear()}-${
+    stringToIntDate.getMonth() + 1
+  }-${stringToIntDate.toLocaleString("en-US", { day: "2-digit" })}`;
+
   const {
     value: enteredTitle,
     isValid: titleIsValid,
@@ -32,7 +43,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changeTitleHandler,
     inputBlurHandler: titleBlurHandler,
     reset: resetTitle,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItem.title);
 
   const {
     value: enteredAmount,
@@ -41,7 +52,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changeAmountHandler,
     inputBlurHandler: amountBlurHandler,
     reset: resetAmount,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItem.amount);
 
   const {
     value: enteredDate,
@@ -50,7 +61,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changeDateHandler,
     inputBlurHandler: dateBlurHandler,
     reset: resetDate,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItemDate);
 
   const {
     value: enteredPayee,
@@ -59,7 +70,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changePayeeHandler,
     inputBlurHandler: payeeBlurHandler,
     reset: resetPayee,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItem.payee);
 
   const {
     value: selectedOption,
@@ -68,7 +79,7 @@ const ExpensesForm = (props) => {
     changeSelectedValueHandler: addUserOnChangeHandler,
     inputBlurHandler: selectedOptionBlurHandler,
     reset: resetSelectedOption,
-  } = useInput((value) => value.length !== 0);
+  } = useInput(isNotEmpty, onEditItem.sharedWith);
 
   let formIsValid = false;
   if (
