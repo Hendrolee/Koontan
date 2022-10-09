@@ -5,8 +5,6 @@ import { useSelector } from "react-redux";
 
 const ExpensesList = () => {
   const expenses = useSelector((state) => state.expenses.expenseItems);
-
-  console.log(expenses);
   return (
     <Card className={classes.expenses}>
       <ul className={classes["expenses-list"]}>
