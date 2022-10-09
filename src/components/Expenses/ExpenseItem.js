@@ -12,7 +12,6 @@ const ExpenseItem = (props) => {
     setIsEditingExpense(false);
   };
 
-  console.log(props);
   return (
     <Fragment>
       {isEditingExpense && (
