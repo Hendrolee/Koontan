@@ -18,7 +18,7 @@ const ModalOverlay = (props) => {
         <h2>Edit Expense</h2>
       </header>
       <div className={classes.content}>
-        <ExpensesForm onCancel={props.onCancel} />
+        <ExpensesForm itemData={expenses} onCancel={props.onCancel} />
       </div>
       <footer className={classes.actions}></footer>
     </Card>
@@ -26,7 +26,6 @@ const ModalOverlay = (props) => {
 };
 
 const EditExpenseModal = (props) => {
-  console.log(props.id);
   return (
     <Fragment>
       {ReactDOM.createPortal(
