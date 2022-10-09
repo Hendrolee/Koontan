@@ -33,7 +33,7 @@ const EditExpenseModal = (props) => {
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay id={props.id} />,
+        <ModalOverlay id={props.id} onCancel={props.onConfirm} />,
         document.getElementById("overlay-root")
       )}
     </Fragment>
