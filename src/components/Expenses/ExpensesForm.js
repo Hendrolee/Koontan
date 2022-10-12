@@ -25,22 +25,31 @@ const Option = (props) => {
   );
 };
 
+const convertDateToString = (date) => {
+  const day = date.toLocaleString("en-US", { day: "2-digit" });
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  const transformedDate = { day, month, year };
+  const stringToIntDate = new Date(
+    Date.parse(
+      transformedDate.month + `${transformedDate.day}, ${transformedDate.year}`
+    )
+  );
+
+  const newDate = `${stringToIntDate.getFullYear()}-${
+    stringToIntDate.getMonth() + 1
+  }-${stringToIntDate.toLocaleString("en-US", { day: "2-digit" })}`;
+
+  return newDate;
+};
+
 const ExpensesForm = (props) => {
   const onEditItem = { ...props.itemData };
   let onEditItemDate = "";
 
-  // TODO: Encapsulate date transformation in function
   if (propsIsNotEmpty(onEditItem)) {
-    const stringToIntDate = new Date(
-      Date.parse(
-        onEditItem.date.month +
-          `${onEditItem.date.day}, ${onEditItem.date.year}`
-      )
-    );
-
-    onEditItemDate = `${stringToIntDate.getFullYear()}-${
-      stringToIntDate.getMonth() + 1
-    }-${stringToIntDate.toLocaleString("en-US", { day: "2-digit" })}`;
+    onEditItemDate = convertDateToString(onEditItem.date);
   }
 
   const {
@@ -107,23 +116,18 @@ const ExpensesForm = (props) => {
     if (!formIsValid) {
       return;
     }
-    const date = new Date(enteredDate);
-    const day = date.toLocaleString("en-US", { day: "2-digit" });
-    const month = date.toLocaleString("en-US", { month: "long" });
-    const year = date.getFullYear();
-    const transformedDate = { day, month, year };
 
     const recordDetails = {
       title: enteredTitle,
       amount: +enteredAmount,
-      date: transformedDate,
+      date: new Date(enteredDate),
       payee: enteredPayee,
       sharedWith: selectedOption,
       id: Math.random().toString(), //TODO
     };
 
     // Edit item must have the same id
-    // TODO : Refactor these nasty codes
+    // TODO : Refactor these codes
     if (!propsIsNotEmpty(onEditItem)) {
       dispatch(expenseActions.addExpense(recordDetails));
     }
@@ -132,7 +136,7 @@ const ExpensesForm = (props) => {
       const recordDetails = {
         title: enteredTitle,
         amount: +enteredAmount,
-        date: transformedDate,
+        date: new Date(enteredDate),
         payee: enteredPayee,
         sharedWith: selectedOption,
         id: onEditItem.id, //TODO
