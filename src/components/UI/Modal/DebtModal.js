@@ -7,9 +7,14 @@ import Backdrop from "../Backdrop/Backdrop";
 import classes from "./DebtModal.module.css";
 
 const ModalOverlay = (props) => {
-  const date = `${props.date.day} ${props.date.month} ${props.date.year}`;
+  const day = props.date.toLocaleString("en-US", { day: "2-digit" });
+  const month = props.date.toLocaleString("en-US", { month: "long" });
+  const year = props.date.getFullYear();
+  const date = `${day} ${month} ${year}`;
+
   const members = props.sharedWith.map((person) => person.value).join(", ");
 
+  console.log(props.date);
   const confirmedPayment = (event) => {
     if (event.target.value === "true") {
       props.onPaymentConfirmation(true);
