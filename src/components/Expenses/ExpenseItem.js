@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import Card from "../UI/Card/Card";
 import EditExpenseModal from "../UI/Modal/EditExpenseModal";
+import ExpenseDate from "./ExpenseDate";
 import classes from "./ExpenseItem.module.css";
 
 const ExpenseItem = (props) => {
@@ -21,13 +22,7 @@ const ExpenseItem = (props) => {
         onClick={startEditingExpenseHandler}
         className={classes["expense-item"]}
       >
-        <div className={classes["expense-date"]}>
-          <div className={classes["expense-date__month"]}>
-            {props.date.month}
-          </div>
-          <div className={classes["expense-date__year"]}>{props.date.year}</div>
-          <div className={classes["expense-date__day"]}>{props.date.day}</div>
-        </div>
+        <ExpenseDate date={props.date} />
         <div className={classes["expense-item__description"]}>
           <h2>{props.title}</h2>
           <div className={classes["expense-payee"]}>{props.payee}</div>
