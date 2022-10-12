@@ -8,6 +8,7 @@ import { expenseActions } from "../store/expense";
 import Button from "../UI/Button/Button";
 
 const isNotEmpty = (value) => value.length !== 0;
+const propsIsNotEmpty = (value) => Object.keys(value).length !== 0;
 
 const Option = (props) => {
   return (
@@ -28,7 +29,8 @@ const ExpensesForm = (props) => {
   const onEditItem = { ...props.itemData };
   let onEditItemDate = "";
 
-  if (Object.keys(onEditItem).length !== 0) {
+  // TODO: Encapsulate date transformation in function
+  if (propsIsNotEmpty(onEditItem)) {
     const stringToIntDate = new Date(
       Date.parse(
         onEditItem.date.month +
@@ -117,10 +119,26 @@ const ExpensesForm = (props) => {
       date: transformedDate,
       payee: enteredPayee,
       sharedWith: selectedOption,
-      id: Math.random().toString(),
+      id: Math.random().toString(), //TODO
     };
 
-    dispatch(expenseActions.addExpense(recordDetails));
+    // Edit item must have the same id
+    // TODO : Refactor these nasty codes
+    if (!propsIsNotEmpty(onEditItem)) {
+      dispatch(expenseActions.addExpense(recordDetails));
+    }
+
+    if (propsIsNotEmpty(onEditItem)) {
+      const recordDetails = {
+        title: enteredTitle,
+        amount: +enteredAmount,
+        date: transformedDate,
+        payee: enteredPayee,
+        sharedWith: selectedOption,
+        id: onEditItem.id, //TODO
+      };
+      dispatch(expenseActions.replaceExpense(recordDetails));
+    }
 
     resetTitle();
     resetAmount();
