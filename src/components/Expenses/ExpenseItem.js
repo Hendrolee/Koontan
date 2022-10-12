@@ -15,7 +15,7 @@ const ExpenseItem = (props) => {
   return (
     <Fragment>
       {isEditingExpense && (
-        <EditExpenseModal id={props.id} onConfirm={stopEditingExpenseHandler} />
+        <EditExpenseModal id={props.id} onCancel={stopEditingExpenseHandler} />
       )}
       <Card
         onClick={startEditingExpenseHandler}
