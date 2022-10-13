@@ -7,11 +7,7 @@ import Backdrop from "../Backdrop/Backdrop";
 import classes from "./DebtModal.module.css";
 
 const ModalOverlay = (props) => {
-  const day = props.date.toLocaleString("en-US", { day: "2-digit" });
-  const month = props.date.toLocaleString("en-US", { month: "long" });
-  const year = props.date.getFullYear();
-  const date = `${day} ${month} ${year}`;
-
+  const date = `${props.date.day} ${props.date.month} ${props.date.year}`;
   const members = props.sharedWith.map((person) => person.value).join(", ");
 
   console.log(props.date);

@@ -1,15 +1,11 @@
 import classes from "./ExpenseDate.module.css";
 
 const ExpenseDate = (props) => {
-  const day = props.date.toLocaleString("en-US", { day: "2-digit" });
-  const month = props.date.toLocaleString("en-US", { month: "long" });
-  const year = props.date.getFullYear();
-
   return (
     <div className={classes["expense-date"]}>
-      <div className={classes["expense-date__month"]}>{month}</div>
-      <div className={classes["expense-date__year"]}>{year}</div>
-      <div className={classes["expense-date__day"]}>{day}</div>
+      <div className={classes["expense-date__month"]}>{props.date.month}</div>
+      <div className={classes["expense-date__year"]}>{props.date.year}</div>
+      <div className={classes["expense-date__day"]}>{props.date.day}</div>
     </div>
   );
 };
