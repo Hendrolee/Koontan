@@ -5,6 +5,10 @@ import classes from "./ExpensesForm.module.css";
 import Card from "../UI/Card/Card";
 import useInput from "../hooks/use-input";
 import { expenseActions } from "../store/expense";
+import {
+  convertDateToObject,
+  convertDateToString,
+} from "../../utils/dateConverter";
 import Button from "../UI/Button/Button";
 
 const isNotEmpty = (value) => value.length !== 0;
@@ -25,31 +29,14 @@ const Option = (props) => {
   );
 };
 
-const convertDateToString = (date) => {
-  const day = date.toLocaleString("en-US", { day: "2-digit" });
-  const month = date.toLocaleString("en-US", { month: "long" });
-  const year = date.getFullYear();
-
-  const transformedDate = { day, month, year };
-  const stringToIntDate = new Date(
-    Date.parse(
-      transformedDate.month + `${transformedDate.day}, ${transformedDate.year}`
-    )
-  );
-
-  const newDate = `${stringToIntDate.getFullYear()}-${
-    stringToIntDate.getMonth() + 1
-  }-${stringToIntDate.toLocaleString("en-US", { day: "2-digit" })}`;
-
-  return newDate;
-};
-
 const ExpensesForm = (props) => {
+  const dispatch = useDispatch();
+
   const onEditItem = { ...props.itemData };
   let onEditItemDate = "";
 
   if (propsIsNotEmpty(onEditItem)) {
-    onEditItemDate = convertDateToString(onEditItem.date);
+    onEditItemDate = convertDateToString(onEditItem);
   }
 
   const {
@@ -108,8 +95,6 @@ const ExpensesForm = (props) => {
     formIsValid = true;
   }
 
-  const dispatch = useDispatch();
-
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -117,10 +102,12 @@ const ExpensesForm = (props) => {
       return;
     }
 
+    const transformedDate = convertDateToObject(enteredDate);
+
     const recordDetails = {
       title: enteredTitle,
       amount: +enteredAmount,
-      date: new Date(enteredDate),
+      date: transformedDate,
       payee: enteredPayee,
       sharedWith: selectedOption,
       id: Math.random().toString(), //TODO
@@ -136,7 +123,7 @@ const ExpensesForm = (props) => {
       const recordDetails = {
         title: enteredTitle,
         amount: +enteredAmount,
-        date: new Date(enteredDate),
+        date: transformedDate,
         payee: enteredPayee,
         sharedWith: selectedOption,
         id: onEditItem.id, //TODO
