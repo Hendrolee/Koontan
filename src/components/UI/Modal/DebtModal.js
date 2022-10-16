@@ -10,7 +10,6 @@ const ModalOverlay = (props) => {
   const date = `${props.date.day} ${props.date.month} ${props.date.year}`;
   const members = props.sharedWith.map((person) => person.value).join(", ");
 
-  console.log(props.date);
   const confirmedPayment = (event) => {
     if (event.target.value === "true") {
       props.onPaymentConfirmation(true);
@@ -50,7 +49,7 @@ const DebtModal = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <Backdrop onCancel={props.onConfirm} />,
+        <Backdrop onCancel={props.onCancel} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
@@ -61,7 +60,7 @@ const DebtModal = (props) => {
           payee={props.payee}
           sharedWith={props.sharedWith}
           payable={props.payable}
-          onConfirm={props.onConfirm}
+          onConfirm={props.onCancel}
           onPaymentConfirmation={props.onPaymentConfirmation}
         />,
         document.getElementById("overlay-root")

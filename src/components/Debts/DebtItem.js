@@ -4,15 +4,15 @@ import DebtModal from "../UI/Modal/DebtModal";
 import { Fragment, useState } from "react";
 
 const DebtItem = (props) => {
-  const [displayModal, setDisplayModal] = useState(false);
+  const [isEditingDebt, setIsEditingDebt] = useState(false);
   const [userHasPaid, setUserHasPaid] = useState(false);
 
-  const expandDetailsHandler = () => {
-    setDisplayModal(true);
+  const startEditingDebtHandler = () => {
+    setIsEditingDebt(true);
   };
 
-  const closeDetailsHandler = () => {
-    setDisplayModal(false);
+  const stopEditingDebtHandler = () => {
+    setIsEditingDebt(false);
   };
 
   const paymentConfirmationHandler = (value) => {
@@ -25,7 +25,7 @@ const DebtItem = (props) => {
 
   return (
     <Fragment>
-      {displayModal && (
+      {isEditingDebt && (
         <DebtModal
           title={props.title}
           amount={props.amount}
@@ -33,7 +33,7 @@ const DebtItem = (props) => {
           payee={props.payee}
           sharedWith={props.sharedWith}
           payable={props.payable}
-          onConfirm={closeDetailsHandler}
+          onCancel={stopEditingDebtHandler}
           onPaymentConfirmation={paymentConfirmationHandler}
         />
       )}
@@ -44,7 +44,7 @@ const DebtItem = (props) => {
         <div className={classes["expense-item__description"]}>
           <div className={classes["expense-item__price"]}>${props.payable}</div>
           <span
-            onClick={expandDetailsHandler}
+            onClick={startEditingDebtHandler}
             className={paymentControlClasses}
           ></span>
         </div>
