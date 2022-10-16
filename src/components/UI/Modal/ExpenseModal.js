@@ -3,10 +3,9 @@ import { Fragment } from "react";
 import Backdrop from "../Backdrop/Backdrop";
 import Card from "../Card/Card";
 import ExpensesForm from "../../Expenses/ExpensesForm";
-import classes from "./EditExpenseModal.module.css";
+import classes from "./ExpenseModal.module.css";
 import { useSelector } from "react-redux";
 
-// Change modal name, both debt and expense
 const ModalOverlay = (props) => {
   const expenses = useSelector((state) =>
     state.expenses.expenseItems.find((item) => item.id === props.id)
