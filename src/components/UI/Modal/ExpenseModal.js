@@ -25,7 +25,7 @@ const ModalOverlay = (props) => {
   );
 };
 
-const EditExpenseModal = (props) => {
+const ExpenseModal = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
@@ -40,4 +40,4 @@ const EditExpenseModal = (props) => {
   );
 };
 
-export default EditExpenseModal;
+export default ExpenseModal;
