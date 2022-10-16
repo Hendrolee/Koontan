@@ -5,7 +5,7 @@ import classes from "./Options.module.css";
 import Button from "../../UI/Button/Button";
 import ExpensesForm from "../../Expenses/ExpensesForm";
 
-const Options = (props) => {
+const Options = () => {
   const [isEditingExpense, setIsEditingExpense] = useState(false);
   const [isEditingDebts, setIsEditingDebts] = useState(false);
 
