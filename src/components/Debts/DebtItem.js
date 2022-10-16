@@ -1,6 +1,6 @@
 import classes from "./DebtItem.module.css";
-import Card from "../../UI/Card/Card";
-import DebtModal from "../../UI/Modal/DebtModal";
+import Card from "../UI/Card/Card";
+import DebtModal from "../UI/Modal/DebtModal";
 import { Fragment, useState } from "react";
 
 const DebtItem = (props) => {

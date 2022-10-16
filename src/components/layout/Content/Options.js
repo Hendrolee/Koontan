@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import Debts from "./Debts/Debts";
-import classes from "../Header/Options.module.css";
-import Button from "../UI/Button/Button";
-import ExpensesForm from "../Expenses/ExpensesForm";
+import Debts from "../../Debts/Debts";
+import classes from "./Options.module.css";
+import Button from "../../UI/Button/Button";
+import ExpensesForm from "../../Expenses/ExpensesForm";
 
 const Options = (props) => {
   const [isEditingExpense, setIsEditingExpense] = useState(false);

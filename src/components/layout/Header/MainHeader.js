@@ -1,6 +1,6 @@
-import classes from "./Navigation.module.css";
+import classes from "./MainHeader.module.css";
 
-const Header = () => {
+const MainHeader = () => {
   return (
     <div className={classes.header}>
       <div className={classes["header-content"]}>
@@ -10,4 +10,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default MainHeader;

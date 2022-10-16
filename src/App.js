@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import ExpensesList from "./components/Expenses/ExpensesList";
-import Options from "./components/Header/Options";
-import Navigation from "./components/UI/Navigation";
+import Options from "./components/layout/Content/Options";
+import MainHeader from "./components/layout/Header/MainHeader";
 
 function App() {
   return (
     <Fragment>
-      <Navigation />
+      <MainHeader />
       <Options />
       <ExpensesList />;
     </Fragment>

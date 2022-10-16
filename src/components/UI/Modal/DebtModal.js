@@ -50,7 +50,7 @@ const DebtModal = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <Backdrop onConfirm={props.onConfirm} />,
+        <Backdrop onCancel={props.onConfirm} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(

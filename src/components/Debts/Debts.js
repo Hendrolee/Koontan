@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import DebtsList from "./DebtsList";
-import Button from "../../UI/Button/Button";
+import Button from "../UI/Button/Button";
 
 const Debts = (props) => {
   const expenses = useSelector((state) => state.expenses.expenseItems);
