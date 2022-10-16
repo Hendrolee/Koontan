@@ -1,8 +1,6 @@
-export const convertDateToString = (itemData) => {
+export const convertDateToString = (date) => {
   const dateObject = new Date(
-    Date.parse(
-      itemData.date.month + `${itemData.date.day}, ${itemData.date.year}`
-    )
+    Date.parse(date.month + `${date.day}, ${date.year}`)
   );
 
   const stringDate = `${dateObject.getFullYear()}-${

@@ -33,10 +33,10 @@ const ExpensesForm = (props) => {
   const dispatch = useDispatch();
 
   const onEditItem = { ...props.itemData };
-  let onEditItemDate = "";
+  let onEditItemDate = onEditItem.date;
 
   if (propsIsNotEmpty(onEditItem)) {
-    onEditItemDate = convertDateToString(onEditItem);
+    onEditItemDate = convertDateToString(onEditItemDate);
   }
 
   const {
