@@ -2,11 +2,17 @@ import { components } from "react-select";
 import { useDispatch } from "react-redux";
 import MySelect from "./MySelect";
 import classes from "./ExpensesForm.module.css";
-import Card from "../UI/Card";
-import useInput from "../hooks/use-input";
+import Card from "../UI/Card/Card";
+import useInput from "../../hooks/use-input";
 import { expenseActions } from "../store/expense";
+import {
+  convertDateToObject,
+  convertDateToString,
+} from "../../utils/dateConverter";
+import Button from "../UI/Button/Button";
 
-const isNotEmpty = (value) => value.trim() !== "";
+const isNotEmpty = (value) => value.length !== 0;
+const propsIsNotEmpty = (value) => Object.keys(value).length !== 0;
 
 const Option = (props) => {
   return (
@@ -24,6 +30,15 @@ const Option = (props) => {
 };
 
 const ExpensesForm = (props) => {
+  const dispatch = useDispatch();
+
+  const onEditItem = { ...props.itemData };
+  let onEditItemDate = onEditItem.date;
+
+  if (propsIsNotEmpty(onEditItem)) {
+    onEditItemDate = convertDateToString(onEditItemDate);
+  }
+
   const {
     value: enteredTitle,
     isValid: titleIsValid,
@@ -31,7 +46,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changeTitleHandler,
     inputBlurHandler: titleBlurHandler,
     reset: resetTitle,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItem.title);
 
   const {
     value: enteredAmount,
@@ -40,7 +55,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changeAmountHandler,
     inputBlurHandler: amountBlurHandler,
     reset: resetAmount,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItem.amount);
 
   const {
     value: enteredDate,
@@ -49,7 +64,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changeDateHandler,
     inputBlurHandler: dateBlurHandler,
     reset: resetDate,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItemDate);
 
   const {
     value: enteredPayee,
@@ -58,7 +73,7 @@ const ExpensesForm = (props) => {
     changeValueHandler: changePayeeHandler,
     inputBlurHandler: payeeBlurHandler,
     reset: resetPayee,
-  } = useInput(isNotEmpty);
+  } = useInput(isNotEmpty, onEditItem.payee);
 
   const {
     value: selectedOption,
@@ -67,7 +82,7 @@ const ExpensesForm = (props) => {
     changeSelectedValueHandler: addUserOnChangeHandler,
     inputBlurHandler: selectedOptionBlurHandler,
     reset: resetSelectedOption,
-  } = useInput((value) => value.length !== 0);
+  } = useInput(isNotEmpty, onEditItem.sharedWith);
 
   let formIsValid = false;
   if (
@@ -80,19 +95,14 @@ const ExpensesForm = (props) => {
     formIsValid = true;
   }
 
-  const dispatch = useDispatch();
-
   const submitHandler = (event) => {
     event.preventDefault();
 
     if (!formIsValid) {
       return;
     }
-    const date = new Date(enteredDate);
-    const day = date.toLocaleString("en-US", { day: "2-digit" });
-    const month = date.toLocaleString("en-US", { month: "long" });
-    const year = date.getFullYear();
-    const transformedDate = { day, month, year };
+
+    const transformedDate = convertDateToObject(enteredDate);
 
     const recordDetails = {
       title: enteredTitle,
@@ -100,10 +110,26 @@ const ExpensesForm = (props) => {
       date: transformedDate,
       payee: enteredPayee,
       sharedWith: selectedOption,
-      id: Math.random().toString(),
+      id: Math.random().toString(), //TODO
     };
 
-    dispatch(expenseActions.addExpense(recordDetails));
+    // Edit item must have the same id
+    // TODO : Refactor these codes
+    if (!propsIsNotEmpty(onEditItem)) {
+      dispatch(expenseActions.addExpense(recordDetails));
+    }
+
+    if (propsIsNotEmpty(onEditItem)) {
+      const recordDetails = {
+        title: enteredTitle,
+        amount: +enteredAmount,
+        date: transformedDate,
+        payee: enteredPayee,
+        sharedWith: selectedOption,
+        id: onEditItem.id, //TODO
+      };
+      dispatch(expenseActions.replaceExpense(recordDetails));
+    }
 
     resetTitle();
     resetAmount();
@@ -141,7 +167,7 @@ const ExpensesForm = (props) => {
 
   return (
     <Card className={classes.form}>
-      <form onSubmit={submitHandler}>
+      <form name="form" onSubmit={submitHandler}>
         <div className={titleControlClasses}>
           <label htmlFor="title">Title</label>
           <input
@@ -217,10 +243,8 @@ const ExpensesForm = (props) => {
         </div>
 
         <div className={classes.actions}>
-          <button className={classes.button}>Add</button>
-          <button className={classes.button} onClick={props.onCancel}>
-            Cancel
-          </button>
+          <Button type="submit">Add</Button>
+          <Button onClick={props.onCancel}>Cancel</Button>
         </div>
       </form>
     </Card>

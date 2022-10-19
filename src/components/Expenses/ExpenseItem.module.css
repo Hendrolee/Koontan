@@ -8,6 +8,11 @@
   list-style: none;
 }
 
+.expense-item:hover {
+  background: #6a6a6a;
+  cursor: pointer;
+}
+
 .expense-item__description {
   display: flex;
   flex-direction: column;

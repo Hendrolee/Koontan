@@ -1,6 +1,6 @@
 import DebtItem from "./DebtItem";
 import classes from "./DebtsList.module.css";
-import Card from "../../UI/Card";
+import Card from "../UI/Card/Card";
 
 const DebtsList = (props) => {
   return (

@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-import Debts from "./Debts/Debts";
-import classes from "../Header/Options.module.css";
-import NewExpense from "./NewExpense/NewExpense";
+import Debts from "../../Debts/Debts";
+import classes from "./Options.module.css";
+import Button from "../../UI/Button/Button";
+import ExpensesForm from "../../Expenses/ExpensesForm";
 
-const Options = (props) => {
+const Options = () => {
   const [isEditingExpense, setIsEditingExpense] = useState(false);
   const [isEditingDebts, setIsEditingDebts] = useState(false);
 
@@ -28,12 +29,12 @@ const Options = (props) => {
     <div className={classes.form}>
       {!isEditingExpense && !isEditingDebts && (
         <div>
-          <button onClick={startEditingDebtsHandler}>Debts</button>
-          <button onClick={startEditingExpenseHandler}>Add Expense</button>
+          <Button onClick={startEditingDebtsHandler}>Debts</Button>
+          <Button onClick={startEditingExpenseHandler}>Add Expenses</Button>
         </div>
       )}
       {isEditingExpense && !isEditingDebts && (
-        <NewExpense onCancel={stopEditingExpenseHandler} />
+        <ExpensesForm onCancel={stopEditingExpenseHandler} />
       )}
       {isEditingDebts && !isEditingExpense && (
         <Debts onCancel={stopEditingDebtsHandler} />

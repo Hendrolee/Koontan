@@ -36,6 +36,24 @@
   border-radius: 12px;
 }
 
+.expense-item__details {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease-in-out;
+}
+
+.expense-item__details:hover {
+  box-shadow: 0 5px 15px rgba(53, 2, 89, 0.4);
+}
+
+.paidIndicator {
+  background-color: #40005d;
+}
+
 @media (min-width: 580px) {
   .expense-item__description {
     flex-direction: row;
