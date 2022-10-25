@@ -7,7 +7,7 @@ export const findUserExpenses = (expenses, userName) => {
 
 export const calculateDebt = (userExpenses) => {
   const numberOfUsers = userExpenses.sharedWith.length;
-  const amount = userExpenses.amount / numberOfUsers.toFixed(2);
+  const amount = (userExpenses.amount / numberOfUsers).toFixed(2);
   return amount;
 };
 
