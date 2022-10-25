@@ -4,10 +4,10 @@ import Backdrop from "../Backdrop/Backdrop";
 import Card from "../Card/Card";
 import ExpensesForm from "../../Expenses/ExpensesForm";
 import classes from "./ExpenseModal.module.css";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../hooks/selector-hooks";
 
 const ModalOverlay = (props) => {
-  const expenses = useSelector((state) =>
+  const expenses = useAppSelector((state) =>
     state.expenses.expenseItems.find((item) => item.id === props.id)
   );
 

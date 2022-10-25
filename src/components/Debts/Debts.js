@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../hooks/selector-hooks";
 import DebtsList from "./DebtsList";
 import Button from "../UI/Button/Button";
 import { createDebt, findUserExpenses } from "../../utils/debtFilter";
 
 const Debts = (props) => {
-  const expenses = useSelector((state) => state.expenses.expenseItems);
+  const expenses = useAppSelector((state) => state.expenses.expenseItems);
   const arrayIsEmpty = expenses.length === 0;
 
   // filter the sharedWith user (Hardcoded)

@@ -1,5 +1,5 @@
 import { components } from "react-select";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../hooks/selector-hooks";
 import MySelect from "./MySelect";
 import classes from "./ExpensesForm.module.css";
 import Card from "../UI/Card/Card";
@@ -30,7 +30,7 @@ const Option = (props) => {
 };
 
 const ExpensesForm = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onEditItem = { ...props.itemData };
   let onEditItemDate = onEditItem.date;
