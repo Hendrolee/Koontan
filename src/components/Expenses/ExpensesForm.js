@@ -230,6 +230,7 @@ const ExpensesForm = (props) => {
 
         <div className={selectedOptionClasses}>
           <MySelect
+            name="sharedWith"
             options={options}
             isMulti
             closeMenuOnSelect={false}
