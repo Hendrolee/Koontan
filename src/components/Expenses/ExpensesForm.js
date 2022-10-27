@@ -167,7 +167,7 @@ const ExpensesForm = (props) => {
 
   return (
     <Card className={classes.form}>
-      <form name="form" onSubmit={submitHandler}>
+      <form data-testid="form" onSubmit={submitHandler}>
         <div className={titleControlClasses}>
           <label htmlFor="title">Title</label>
           <input

@@ -49,7 +49,7 @@ describe("Options component", () => {
       });
       userEvent.click(buttonElement);
 
-      const formElement = screen.getByRole("form");
+      const formElement = screen.getByTestId("form");
 
       expect(formElement).toBeInTheDocument();
     });
