@@ -173,6 +173,7 @@ const ExpensesForm = (props) => {
           <input
             type="text"
             id="title"
+            data-testid="title-input"
             value={enteredTitle}
             onChange={changeTitleHandler}
             onBlur={titleBlurHandler}
@@ -187,6 +188,7 @@ const ExpensesForm = (props) => {
           <input
             type="number"
             id="amount"
+            data-testid="amount-input"
             value={enteredAmount}
             onChange={changeAmountHandler}
             onBlur={amountBlurHandler}
@@ -201,6 +203,7 @@ const ExpensesForm = (props) => {
           <input
             type="date"
             id="date"
+            data-testid="date-input"
             value={enteredDate}
             onChange={changeDateHandler}
             onBlur={dateBlurHandler}
@@ -215,6 +218,7 @@ const ExpensesForm = (props) => {
           <input
             type="text"
             id="payee"
+            data-testid="payee-input"
             value={enteredPayee}
             onChange={changePayeeHandler}
             onBlur={payeeBlurHandler}
