@@ -1,13 +1,25 @@
-import { screen, render, fireEvent, getByTestId } from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import ExpensesForm from "../ExpensesForm";
 import selectEvent from "react-select-event";
 import { Provider } from "react-redux";
 import store from "../../store";
+import Options from "../../layout/Content/Options";
 
 const MockExpenseForm = () => {
   return (
     <Provider store={store}>
       <ExpensesForm />
+    </Provider>
+  );
+};
+
+const RenderWithOptions = () => {
+  return (
+    <Provider store={store}>
+      <Options>
+        <ExpensesForm />
+      </Options>
     </Provider>
   );
 };
@@ -194,4 +206,43 @@ describe("ExpenseForm component", () => {
       expect(outputElement).toBeInTheDocument();
     });
   });
+
+  describe("buttons", () => {
+    test('renders "Add" button', () => {
+      render(<MockExpenseForm />);
+
+      const buttonElement = screen.getByRole("button", { name: "Add" });
+      expect(buttonElement).toBeInTheDocument();
+    });
+
+    test('renders "Cancel" button', () => {
+      render(<MockExpenseForm />);
+
+      const buttonElement = screen.getByRole("button", { name: "Cancel" });
+      expect(buttonElement).toBeInTheDocument();
+    });
+
+    describe("form submission", () => {
+      test('clicking "Cancel" button should close the form', async () => {
+        render(<RenderWithOptions />);
+
+        // Click to open the form
+        const addExpenseButtonElement = await screen.findByRole("button", {
+          name: "Add Expenses",
+        });
+        userEvent.click(addExpenseButtonElement);
+
+        // Click cancel button to close the form
+        const buttonElement = await screen.findByRole("button", {
+          name: "Cancel",
+        });
+        userEvent.click(buttonElement);
+
+        const inputElement = screen.queryByTestId("form");
+        expect(inputElement).toBe(null);
+      });
+    });
+  });
 });
+
+// implement beforeEach, before each test, we attempt to open the form by clicking add expenses
