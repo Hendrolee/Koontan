@@ -148,12 +148,50 @@ describe("ExpenseForm component", () => {
     });
   });
 
-  // describe('renders error messages', () => {
-  //   test('title input error', async () => {
-  //     render(<MockExpenseForm/>)
-  //     const inputElement = screen.findByTestId('title-input')
-  //     userEvent.click(inputElement)
+  describe("renders error messages", () => {
+    test("title input error", async () => {
+      render(<MockExpenseForm />);
+      const inputElement = await screen.findByTestId("title-input");
+      fireEvent.blur(inputElement);
 
-  //   })
-  // })
+      const outputElement = screen.getByTestId("title-error");
+      expect(outputElement).toBeInTheDocument();
+    });
+
+    test("amount input error", async () => {
+      render(<MockExpenseForm />);
+      const inputElement = await screen.findByTestId("amount-input");
+      fireEvent.blur(inputElement);
+
+      const outputElement = screen.getByTestId("amount-error");
+      expect(outputElement).toBeInTheDocument();
+    });
+
+    test("date input error", async () => {
+      render(<MockExpenseForm />);
+      const inputElement = await screen.findByTestId("date-input");
+      fireEvent.blur(inputElement);
+
+      const outputElement = screen.getByTestId("date-error");
+      expect(outputElement).toBeInTheDocument();
+    });
+
+    test("payee input error", async () => {
+      render(<MockExpenseForm />);
+      const inputElement = await screen.findByTestId("payee-input");
+      fireEvent.blur(inputElement);
+
+      const outputElement = screen.getByTestId("payee-error");
+      expect(outputElement).toBeInTheDocument();
+    });
+
+    test("sharedWith input error", async () => {
+      render(<MockExpenseForm />);
+      const inputElement = await screen.findByRole("combobox");
+      fireEvent.blur(inputElement);
+
+      const outputElement = screen.getByTestId("sharedWith-error");
+      expect(outputElement).toBeInTheDocument();
+    });
+  });
 });

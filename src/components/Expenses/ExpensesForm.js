@@ -179,7 +179,9 @@ const ExpensesForm = (props) => {
             onBlur={titleBlurHandler}
           />
           {titleHasError && (
-            <p className={classes["error-text"]}>Please enter a title!</p>
+            <p data-testid="title-error" className={classes["error-text"]}>
+              Please enter a title!
+            </p>
           )}
         </div>
 
@@ -194,7 +196,9 @@ const ExpensesForm = (props) => {
             onBlur={amountBlurHandler}
           />
           {amountHasError && (
-            <p className={classes["error-text"]}>Please enter an amount!</p>
+            <p data-testid="amount-error" className={classes["error-text"]}>
+              Please enter an amount!
+            </p>
           )}
         </div>
 
@@ -209,7 +213,9 @@ const ExpensesForm = (props) => {
             onBlur={dateBlurHandler}
           />
           {dateHasError && (
-            <p className={classes["error-text"]}>Please enter a date!</p>
+            <p data-testid="date-error" className={classes["error-text"]}>
+              Please enter a date!
+            </p>
           )}
         </div>
 
@@ -224,7 +230,9 @@ const ExpensesForm = (props) => {
             onBlur={payeeBlurHandler}
           />
           {payeeHasError && (
-            <p className={classes["error-text"]}>Please enter payee's name!</p>
+            <p data-testid="payee-error" className={classes["error-text"]}>
+              Please enter payee's name!
+            </p>
           )}
         </div>
 
@@ -243,7 +251,9 @@ const ExpensesForm = (props) => {
             placeholder="Shared with..."
           />
           {selectedOptionHasError && (
-            <p className={classes["error-text"]}>Please select users name!</p>
+            <p data-testid="sharedWith-error" className={classes["error-text"]}>
+              Please select users name!
+            </p>
           )}
         </div>
 
