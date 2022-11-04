@@ -6,10 +6,10 @@ import { Provider } from "react-redux";
 import store from "../../store";
 import Options from "../../layout/Content/Options";
 
-const MockExpenseForm = () => {
+const MockExpenseForm = (props) => {
   return (
-    <Provider store={store}>
-      <ExpensesForm />
+    <Provider onSubmit={props.onSubmit} store={store}>
+      <ExpensesForm onSubmit={props.onSubmit} />
     </Provider>
   );
 };
@@ -241,6 +241,62 @@ describe("ExpenseForm component", () => {
         const inputElement = screen.queryByTestId("form");
         expect(inputElement).toBe(null);
       });
+
+      test("should clear all input fields when submitted", async () => {
+        render(<MockExpenseForm />);
+
+        const titleInputElement = screen.getByTestId("title-input");
+        fireEvent.change(titleInputElement, { target: { value: "Lunch" } });
+
+        const amountInputElement = screen.getByTestId("amount-input");
+        fireEvent.change(amountInputElement, { target: { value: "50" } });
+
+        const dateInputElement = screen.getByTestId("date-input");
+        fireEvent.change(dateInputElement, { target: { value: "2020-10-10" } });
+
+        const payeeInputElement = screen.getByTestId("payee-input");
+        fireEvent.change(payeeInputElement, { target: { value: "Patrick" } });
+
+        const selectInputElement = await screen.findByRole("combobox");
+        await selectEvent.select(selectInputElement, ["Patrick", "Fayola"]);
+
+        const formElement = screen.queryByTestId("form");
+        fireEvent.submit(formElement);
+        expect(formElement).toHaveFormValues({
+          title: "",
+          amount: null,
+          date: "",
+          payee: "",
+          sharedWith: "",
+        });
+      });
+
+      // test("should submit form when all fields are filled", async () => {
+      //   const onSubmit = jest.fn();
+      //   render(<MockExpenseForm onSubmit={onSubmit} />);
+
+      //   const titleInputElement = screen.getByTestId("title-input");
+      //   fireEvent.change(titleInputElement, { target: { value: "Lunch" } });
+
+      //   const amountInputElement = screen.getByTestId("amount-input");
+      //   fireEvent.change(amountInputElement, { target: { value: "50" } });
+
+      //   const dateInputElement = screen.getByTestId("date-input");
+      //   fireEvent.change(dateInputElement, { target: { value: "2020-10-10" } });
+
+      //   const payeeInputElement = screen.getByTestId("payee-input");
+      //   fireEvent.change(payeeInputElement, { target: { value: "Patrick" } });
+
+      //   const selectInputElement = await screen.findByRole("combobox");
+      //   await selectEvent.select(selectInputElement, ["Patrick", "Fayola"]);
+
+      //   const addButtonElement = await screen.findByRole("button", {
+      //     name: /add/i,
+      //   });
+      //   fireEvent.click(addButtonElement);
+
+      //   expect(onSubmit).toHaveBeenCalled();
+      // });
     });
   });
 });
