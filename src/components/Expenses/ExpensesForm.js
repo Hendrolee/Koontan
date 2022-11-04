@@ -171,6 +171,7 @@ const ExpensesForm = (props) => {
         <div className={titleControlClasses}>
           <label htmlFor="title">Title</label>
           <input
+            name="title"
             type="text"
             id="title"
             data-testid="title-input"
@@ -188,6 +189,7 @@ const ExpensesForm = (props) => {
         <div className={amountControlClasses}>
           <label htmlFor="amount">Amount</label>
           <input
+            name="amount"
             type="number"
             id="amount"
             data-testid="amount-input"
@@ -205,6 +207,7 @@ const ExpensesForm = (props) => {
         <div className={dateControlClasses}>
           <label htmlFor="date">Date</label>
           <input
+            name="date"
             type="date"
             id="date"
             data-testid="date-input"
@@ -222,6 +225,7 @@ const ExpensesForm = (props) => {
         <div className={payeeControlClasses}>
           <label htmlFor="payee">Payee</label>
           <input
+            name="payee"
             type="text"
             id="payee"
             data-testid="payee-input"
